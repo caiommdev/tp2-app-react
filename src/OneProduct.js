@@ -12,28 +12,28 @@ const Product = ({item}) => {
     )
 }
 
-
-function OneProduct() {
+function OneProduct(){
     const [data, setData] = useState(null);
     
     useEffect(() => {
         const fetchData = async  () => {
-            const response = await fetch(`https://fakestoreapi.com/products/0`);
+            const response = await fetch('https://fakestoreapi.com/products/1');
             if(!response.ok){
                 throw new Error('Network failed');
             }
             const result = await response.json();
             setData(result);
-            console.log(result)
         }
-            fetchData();
+        fetchData();
     }, [])
-    
+
+    if(!data){
+        return <div>Carregando...</div>
+    }
+    console.log(data)
     return(
         <div>
-        {data.map((item, index) => (
-            <Product key={index} item={item}/>
-        ))}
+            <Product key={data.id} item={data}/>
         </div>
     );
 }

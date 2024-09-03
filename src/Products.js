@@ -24,9 +24,13 @@ function Products(){
             const result = await response.json();
             setData(result);
         }
-            fetchData();
+        fetchData();
     }, [])
-    
+
+    if(!data){
+        return <div>Carregando...</div>
+    }
+        
     return(
         <div>
             {data.map((item, index) => (
